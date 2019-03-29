@@ -10,20 +10,6 @@ def reverse_sentence(my_sentence)
   return my_sentence
 end
 
-def string_reverse(my_string)
-  if my_string
-    length = my_string.length
-    (length / 2).times do |index|
-      temp = my_string[index]
-      my_string[index] = my_string[length - (index + 1)]
-      my_string[length - (index + 1)] = temp
-    end
-    return my_string
-  else
-    return nil
-  end
-end
-
 def reverse_words(my_words)
   # check that my_words is not nil
   if my_words
@@ -43,7 +29,7 @@ def reverse_words(my_words)
         end
         word_end = index
         # reverse found word
-        word_reverse(my_words, word_start, word_end)
+        string_reverse(my_words, word_start, word_end)
       end
       # move to next char. if a word was found, this will be the char after the word
       index += 1
@@ -55,12 +41,17 @@ def reverse_words(my_words)
 end
 
 # modified version of string_reverse solution from last week's hw
-def word_reverse(my_string, start_index, end_index)
-  # binding.pry
-  (((end_index + 1) - start_index) / 2).times do |i|
-    temp = my_string[start_index + i]
-    my_string[start_index + i] = my_string[end_index - (i + 1)]
-    my_string[end_index - (i + 1)] = temp
+def string_reverse(my_string, start_index = nil, end_index = nil)
+  if my_string
+    start_index ||= 0
+    end_index ||= my_string.length
+    (((end_index + 1) - start_index) / 2).times do |i|
+      temp = my_string[start_index + i]
+      my_string[start_index + i] = my_string[end_index - (i + 1)]
+      my_string[end_index - (i + 1)] = temp
+    end
+    return my_string
+  else
+    return nil
   end
-  return my_string
 end
